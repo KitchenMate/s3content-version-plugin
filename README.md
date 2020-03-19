@@ -1,6 +1,6 @@
-# jupyterlab-toggle-editable
+# s3content-version-plugin
 
-![Github Actions Status](https://github.com/KitchenMate/jupyterlab-toggle-editable/workflows/Build/badge.svg)
+![Github Actions Status](https://github.com/KitchenMate/s3content-version-plugin/workflows/Build/badge.svg)
 
 Toggle ability to edit cell in notebook
 
@@ -12,7 +12,7 @@ Toggle ability to edit cell in notebook
 ## Install
 
 ```bash
-jupyter labextension install jupyterlab-toggle-editable
+jupyter labextension install s3content-version-plugin
 ```
 
 ## Contributing
@@ -25,7 +25,7 @@ The `jlpm` command is JupyterLab's pinned version of
 
 ```bash
 # Clone the repo to your local environment
-# Move to jupyterlab-toggle-editable directory
+# Move to s3content-version-plugin directory
 # Install dependencies
 jlpm
 # Build Typescript source
@@ -50,6 +50,6 @@ jupyter lab --watch
 ### Uninstall
 
 ```bash
-jupyter labextension uninstall jupyterlab-toggle-editable
+jupyter labextension uninstall s3content-version-plugin
 ```
 
