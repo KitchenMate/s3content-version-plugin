@@ -8,6 +8,9 @@ To install this fork, add the following to your Pipfile (for pipenv users):
 s3contents = {editable = true, git = "https://github.com/KitchenMate/s3contents.git", ref = "master"}
 ```
 
+![Image of Dropdown](https://raw.githubusercontent.com/KitchenMate/s3content-version-plugin/master/dropdown-screenshot.png)
+![Image of Prompt](https://raw.githubusercontent.com/KitchenMate/s3content-version-plugin/master/prompt-screenshot.png)
+
 ## Requirements
 
 * JupyterLab >= 1.0
