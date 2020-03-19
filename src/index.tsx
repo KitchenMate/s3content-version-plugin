@@ -40,6 +40,7 @@ export class S3VersionControl extends ReactWidget {
 	}
 	async versionSelected(e: any) {
 		let versionId = e.target.value;
+		if (!versionId) {return;}
 		this.panel.model.metadata.set("s3_requested_version", versionId);
 		await this.panel.context.save();
 		await this.reloadDocument();
