@@ -9,7 +9,7 @@ import {IDocumentManager} from '@jupyterlab/docmanager';
 
 const plugin: JupyterFrontEndPlugin<void> = {
 	activate,
-	id: 's3-versioned-notebooks:dropdownPlugin',
+	id: 's3content-version-plugin:dropdownPlugin',
 	requires: [NotebookPanel.IContentFactory, IDocumentManager],
 	autoStart: true
 };
@@ -65,7 +65,7 @@ export class S3VersionControl extends ReactWidget {
 		this.update();
 	}
 	render() {
-		let unlistedVersions: any[] = [];
+		let unlistedVersions: any[] = [<option key="latest-select">Select Version</option>];
 		let groupedVersions: any = {};
 		let selectedGroup: string = "";
 
@@ -84,7 +84,7 @@ export class S3VersionControl extends ReactWidget {
 					selectedGroup = key;
 				}
 				groupedVersions[key] = unlistedVersions;
-				unlistedVersions = [];
+				unlistedVersions = [<option key={key}>Select Version</option>];
 			}
 			unlistedVersions.push(option);
 		});
@@ -93,13 +93,18 @@ export class S3VersionControl extends ReactWidget {
 		groupedVersions['all'] = _.flatten(_.values(groupedVersions));
 
 		let releaseOptions = _.map(_.keys(groupedVersions), (k: any) => {
-			return (<option key={k} onClick={this.selectRelease.bind(this, k)}>{k}</option>);
+			return (<option key={k} value={k} onClick={this.selectRelease.bind(this,k)}>{k}</option>);
 		});
-		return (<div>
-			<select value={this.selectedRelease || selectedGroup || "all"}>{releaseOptions}</select>
-			<select value={this.requestedVersion}>{groupedVersions[this.selectedRelease || selectedGroup || "all"]}</select>
-			<button onClick={this.createRelease.bind(this)}>New Release</button>
-		</div>)	
+		let listedVersions = groupedVersions[this.selectedRelease || selectedGroup || "all"];
+		if (listedVersions.length <= 0) {
+			return <b>Loading...</b>
+		} else {
+			return (<div>
+				<select value={this.selectedRelease || selectedGroup || "all"}>{releaseOptions}</select>
+				<select value={this.requestedVersion || listedVersions[0].key}>{listedVersions}</select>
+				<button onClick={this.createRelease.bind(this)}>New Release</button>
+			</div>)
+		}
 	}
 
 }
