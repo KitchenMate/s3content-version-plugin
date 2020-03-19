@@ -1,13 +1,18 @@
 # s3content-version-plugin
 
-![Github Actions Status](https://github.com/KitchenMate/s3content-version-plugin/workflows/Build/badge.svg)
+This jupyterlab plugin allows for running (but not editing) of older versions of a notebook hosted on the s3contents backend.
 
-Toggle ability to edit cell in notebook
-
+Note: this plugin requires a fork of s3contents w/ version control hooks.
+To install this fork, add the following to your Pipfile (for pipenv users):
+```toml
+s3contents = {editable = true, git = "https://github.com/KitchenMate/s3contents.git", ref = "master"}
+```
 
 ## Requirements
 
 * JupyterLab >= 1.0
+* s3contents (KitchenMate fork)
+* s3 bucket with versioning turned on
 
 ## Install
 
