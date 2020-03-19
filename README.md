@@ -20,7 +20,7 @@ s3contents = {editable = true, git = "https://github.com/KitchenMate/s3contents.
 ## Install
 
 ```bash
-jupyter labextension install s3content-version-plugin
+jupyter labextension install jupyterlab-s3content-version-plugin
 ```
 
 ## Contributing
@@ -58,6 +58,6 @@ jupyter lab --watch
 ### Uninstall
 
 ```bash
-jupyter labextension uninstall s3content-version-plugin
+jupyter labextension uninstall jupyterlab-s3content-version-plugin
 ```
 
