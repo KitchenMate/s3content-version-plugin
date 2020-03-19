@@ -1,6 +1,6 @@
 {
   "name": "jupyterlab-s3content-version-plugin",
-  "version": "0.1.1",
+  "version": "0.0.1",
   "description": "Move between various s3 versions of a notebook ",
   "keywords": [
     "jupyter",
