@@ -38,8 +38,9 @@ export class S3VersionControl extends ReactWidget {
 		this.versions = versions;
 		this.update();
 	}
-	async versionSelected(version: any) {
-		this.panel.model.metadata.set("s3_requested_version", version['version_id']);
+	async versionSelected(e: any) {
+		let versionId = e.target.value;
+		this.panel.model.metadata.set("s3_requested_version", versionId);
 		await this.panel.context.save();
 		await this.reloadDocument();
 	}
@@ -60,8 +61,8 @@ export class S3VersionControl extends ReactWidget {
 		await this.panel.context.save();
 		await this.reloadDocument();
 	}
-	selectRelease(k: string) {
-		this.selectedRelease = k;
+	selectChanged(e: any) {
+		this.selectedRelease = e.target.value;
 		this.update();
 	}
 	render() {
@@ -73,7 +74,7 @@ export class S3VersionControl extends ReactWidget {
 			let release = this.getReleaseTagForVersion(version);
 			let message = this.getReleaseMessageForVersion(version);
 			let option = (
-				<option key={version.version_id} value={version.version_id} onClick={this.versionSelected.bind(this, version)}>
+				<option key={version.version_id} value={version.version_id}>
 					{version.timestamp}
 				</option>
 			);
@@ -93,15 +94,15 @@ export class S3VersionControl extends ReactWidget {
 		groupedVersions['all'] = _.flatten(_.values(groupedVersions));
 
 		let releaseOptions = _.map(_.keys(groupedVersions), (k: any) => {
-			return (<option key={k} value={k} onClick={this.selectRelease.bind(this,k)}>{k}</option>);
+			return (<option key={k} value={k}>{k}</option>);
 		});
 		let listedVersions = groupedVersions[this.selectedRelease || selectedGroup || "all"];
 		if (listedVersions.length <= 0) {
 			return <b>Loading...</b>
 		} else {
 			return (<div>
-				<select value={this.selectedRelease || selectedGroup || "all"}>{releaseOptions}</select>
-				<select value={this.requestedVersion || listedVersions[0].key}>{listedVersions}</select>
+				<select onChange={this.selectChanged.bind(this)} value={this.selectedRelease || selectedGroup || "all"}>{releaseOptions}</select>
+				<select onChange={this.versionSelected.bind(this)} value={this.requestedVersion || listedVersions[0].key}>{listedVersions}</select>
 				<button onClick={this.createRelease.bind(this)}>New Release</button>
 			</div>)
 		}
